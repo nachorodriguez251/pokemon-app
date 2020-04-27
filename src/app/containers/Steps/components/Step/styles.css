@@ -1,0 +1,11 @@
+.stepDesc {
+  margin-top: 25px;
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.roundImg {
+  border-radius: 100%;
+}

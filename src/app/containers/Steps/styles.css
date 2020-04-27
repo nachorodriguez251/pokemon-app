@@ -1,0 +1,10 @@
+.span_1_of_3 {
+  width: 32.26%;
+  display: inline-block;
+}
+
+.colSteps {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}

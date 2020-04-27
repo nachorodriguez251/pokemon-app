@@ -1,0 +1,15 @@
+.paragraph {
+  margin: 50px 00px 80px 0px;
+}
+
+p {
+  text-transform: none;
+  text-align: left;
+  line-height: 175%;
+  font-size: 125%;
+}
+
+.paragraph h2 {
+  text-align: justify;
+  margin-bottom: 30px;
+}

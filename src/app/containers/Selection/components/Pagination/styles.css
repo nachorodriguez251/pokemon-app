@@ -1,0 +1,17 @@
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline;
+  margin: 0px 5px;
+}
+
+li a {
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 100%;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}

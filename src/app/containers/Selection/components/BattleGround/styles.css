@@ -1,0 +1,21 @@
+.battle-ground-container {
+  border: 2px solid #E6E6E6;
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 15%;
+  background-color: #F8F8F8;
+}
+
+.battle-ground-container h4 {
+  text-align: left;
+}
+
+.selected-pokemon {
+  max-width: 18%;
+  background-color: #c7e3e8;
+  border-radius: 100%;
+}
