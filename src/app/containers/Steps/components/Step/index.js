@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 
-function index(props) {
+function Step(props) {
   return (
     <div>
       <img
@@ -15,4 +15,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Step;

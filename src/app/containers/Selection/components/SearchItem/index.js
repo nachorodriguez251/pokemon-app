@@ -1,6 +1,9 @@
 import React from 'react';
-import './styles.css';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectForBattle, fetchPokemonDetails } from '../../actions';
 import Button from '../../../../components/Button';
+import './styles.css';
 
 const limitDescription = (desc, limit = 200) => {
   const newDesc = [];
@@ -18,15 +21,24 @@ const limitDescription = (desc, limit = 200) => {
   return desc;
 };
 
-function index(props) {
+function SearchItem(props) {
+  const dispatch = useDispatch();
+  const battle1 = useSelector((state) => state.battle1);
+  const battle2 = useSelector((state) => state.battle2);
+
   return (
     <div className="pokemon-container">
       <div className="pokemon-title">
-        <img
-          className="pokemon-image"
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${props.number}.png`}
-          alt="001"
-        />
+        <Link
+          to={`/pokemon/${props.id}`}
+          onClick={() => dispatch(fetchPokemonDetails(props.id, dispatch))}
+        >
+          <img
+            className="pokemon-image"
+            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${props.number}.png`}
+            alt={props.number}
+          />
+        </Link>
         <h3 className="pokemon-name">
           { props.name }
         </h3>
@@ -36,7 +48,7 @@ function index(props) {
         </h4>
       </div>
       <div className="pokemon-details">
-        <p className="pokemon-description">
+        <p className="pokemon-description block-with-text">
           { limitDescription(props.description) }
         </p>
         <div className="pokemon-types">
@@ -52,13 +64,20 @@ function index(props) {
           </span>
         </div>
         <div className="pokemon-select-container">
-          <Button
-            text="select"
-          />
+          <Link
+            to="selection"
+            onClick={() => dispatch(selectForBattle(props.number, props.name))}
+          >
+            <Button
+              styleName="btn-selection"
+              text="Select"
+              disable={battle1 && battle2}
+            />
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default index;
+export default SearchItem;

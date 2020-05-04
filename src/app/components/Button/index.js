@@ -3,9 +3,9 @@ import './styles.css';
 
 function Button(props) {
   return (
-    <a href="#" className="btn-app">
+    <button href="#" className={props.styleName} disabled={props.disable}>
       { props.text }
-    </a>
+    </button>
   );
 }
 

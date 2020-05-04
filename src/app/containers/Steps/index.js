@@ -2,7 +2,7 @@ import React from 'react';
 import Step from './components/Step';
 import './styles.css';
 
-function index() {
+function Steps() {
   return (
     <div className="colSteps">
       <div className="span_1_of_3">
@@ -33,4 +33,4 @@ function index() {
   );
 }
 
-export default index;
+export default Steps;

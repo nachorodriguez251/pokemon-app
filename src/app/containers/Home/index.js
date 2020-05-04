@@ -6,7 +6,7 @@ import Info from '../Info';
 import Steps from '../Steps';
 
 
-function index() {
+function Home() {
   return (
     <div>
       <Hero />
@@ -19,4 +19,4 @@ function index() {
   );
 }
 
-export default index;
+export default Home;

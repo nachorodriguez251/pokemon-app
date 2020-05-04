@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 
-function index(props) {
+function Paragraph(props) {
   return (
     <div className="paragraph">
       <h2>{ props.title }</h2>
@@ -22,4 +22,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Paragraph;

@@ -1,0 +1,132 @@
+.back-container {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.15);
+  width: 100%;
+}
+
+.back-container-loading {
+  height: 100vh;
+}
+
+.modal {
+  background: #fff;
+  top: 25px;
+  width: 70%;
+  margin: 2% auto;
+  padding: 15px;
+  border: 2px solid #444;
+  display: flex;
+}
+
+.modal-left-container,
+.modal-right-container {
+  margin: 1%;
+  width: 48%;
+}
+
+.modal-loading-container {
+  width: 100%;
+}
+
+
+.modal-btn-close {
+  float: right;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  text-decoration: inherit;
+}
+
+ion-icon[name="close"] { 
+  line-height: 120%;
+  vertical-align: middle;
+  margin-top: -5px;
+  font-weight: bold;
+}
+
+.modal-image {
+  margin: 25% 0 10% 0;
+}
+
+.modal-select {
+  padding: 14px 35px;
+  font-size: 110%;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #000;
+  color: #fff;
+  border:none;
+  cursor: pointer;
+}
+
+.modal-select:disabled {
+  background-color: #a8a8a8;
+  color: #666666;
+  cursor: default;
+}
+
+.modal-title {
+  text-align: left;
+  font-size: 300%;
+}
+
+.modal-number {
+  text-align: left;
+  font-size: 180%;
+}
+
+.modal-description {
+  padding: 20px 0;
+  color: #333;
+}
+
+.modal-details {
+  border: 1px solid #444;
+}
+
+.modal-atributes {
+  padding: 20px 30px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-types-weaknesses {
+  padding: 20px 30px;
+}
+
+.modal-attribute-title,
+.modal-weaknesses-title,
+.modal-types-title {
+  color: #999;
+  text-align: left;
+}
+
+.modal-attribute-value {
+  font-size: 200%;
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.modal-types,
+.modal-weaknesses {
+  margin: 10px 7px 10px 0px;
+  text-align: left;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.modal-attribute-weight {
+  text-transform: none;
+}
+
+.modal-types span,
+.modal-weaknesses span {
+  margin-right: 7px;
+  border-radius: 5px;
+  padding: 3px 30px;
+  color: #fff;
+  font-size: 80%;
+  margin-bottom: 7px;
+}

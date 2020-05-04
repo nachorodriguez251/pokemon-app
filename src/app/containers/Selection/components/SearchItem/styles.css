@@ -1,14 +1,15 @@
 .pokemon-container {
-  margin: 20px 0px;
+  margin: 20px 0.6%;
   border: 2px solid #E6E6E6;
   width: 32%;
   padding: 25px;
 }
 
 .pokemon-image {
-  max-width: 60%;
+  max-width: 65%;
   background-color: #c7e3e8;
   border-radius: 100%;
+  padding: 10px;
 }
 
 .pokemon-name {
@@ -34,6 +35,50 @@
   color: #bebebe;
 }
 
+/* styles for '...' 
+   from http://hackingui.com/front-end/a-pure-css-solution-for-multiline-text-truncation/ 
+*/ 
+.block-with-text {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative; 
+  /* use this value to count block height */
+  line-height: 1.7em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 5.7em; 
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;  
+  /* place for '...' */
+  /* margin-right: -1em; */
+  padding-right: 1em;
+}
+/* create the ... */
+.block-with-text:before {
+  /* points in the end */
+  content: '...';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.block-with-text:after {
+  /* points in the end */
+  content: '';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  right: 0;
+  /* set width and height */
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  /* bg color = bg color under block */
+  background: white;
+}
+
 .pokemon-types {
   margin: 20px 0px;
   padding: 10px 0px;
@@ -51,6 +96,22 @@
   padding: 10px 0px;
 }
 
+.btn-selection{
+    padding: 8px 50px;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 120%;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-selection:disabled {
+  background-color: #a8a8a8;
+  color: #666666;
+  cursor: default;
+}
 
 .fire {
   background-color: #EE8130;
@@ -123,5 +184,3 @@
 .fairy {
   background-color: #D685AD;
 }
-
-

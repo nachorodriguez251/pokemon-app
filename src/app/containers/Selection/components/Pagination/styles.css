@@ -7,11 +7,19 @@ li {
   margin: 0px 5px;
 }
 
-li a {
+.btn-page {
   text-decoration: none;
-  padding: 4px 12px;
+  width: 35px;
+  height: 35px;
   border-radius: 100%;
   background-color: #000;
   color: #fff;
   cursor: pointer;
+  border:none;
+}
+
+.btn-page:disabled {
+  background-color: #a8a8a8;
+  color: #666666;
+  cursor: default;
 }

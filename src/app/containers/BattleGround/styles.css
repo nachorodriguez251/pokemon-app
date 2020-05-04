@@ -1,0 +1,69 @@
+.battle-ground-container {
+  border: 2px solid #E6E6E6;
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 15%;
+  background-color: #F8F8F8;
+}
+
+.battle-ground-title {
+  text-align: left;
+  font-size: 110%;
+  line-height: 100%;
+}
+
+.battle-ground-pokemon-1,
+.battle-ground-pokemon-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 110px;
+}
+
+.selected-pokemon {
+  max-width: 55%;
+  background-color: #c7e3e8;
+  border-radius: 100%;
+  transform: translate(0, -15%);
+}
+
+ion-icon[name="close-outline"] { 
+  background-color: #000;
+  color: #fff;
+  border-radius: 100%;
+  font-size: 10%;
+  transform: translate(170%, 30%);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+ion-icon[name="help-outline"] { 
+  font-size: 60px;
+  padding: 14px;
+}
+
+.battle-ground-pokemon-name{
+  color: #999;
+  margin-top: -5px;
+}
+
+.btn-fight {
+  padding: 10px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-fight:disabled {
+  background-color: #a8a8a8;
+  color: #666666;
+  cursor: default;
+}

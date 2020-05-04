@@ -1,43 +1,111 @@
+import {
+  FETCH_DETAILS_SUCCESS,
+  FETCH_DETAILS_REQUEST,
+  SELECT_FOR_BATTLE,
+  CLEAR_POKEMON_1,
+  CLEAR_POKEMON_2,
+  CHANGE_PAGE,
+  FILTER_NAME,
+  CHANGE_TYPE_1,
+  CHANGE_TYPE_2,
+} from '../actionTypes';
+
 const initialState = {
-  pokemonList: [
-    {
-      name: 'Bulbasaur',
-      number: '001',
-      description: 'Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun&apos;s rays, the seed grows progressively larger.',
-      type1: 'Grass',
-      type2: 'Poison',
-    },
-    {
-      name: 'Ivysaur',
-      number: '002',
-      description: 'This Pokémon has a bulb on its back and, to support its weight, it has thick and strong legs and a trunk. If you start spending more time in the sun, it is because the bulb is about to become a big flower.',
-      type1: 'Grass',
-      type2: 'Poison',
-    },
-    {
-      name: 'Venusaur',
-      number: '003',
-      description: 'Venusaur has a huge flower on its back, which seems to take on very bright colors if it is well nourished and gives it plenty of sun. The delicate aroma of the flower has a relaxing effect on people&apos;s spirits.',
-      type1: 'Grass',
-      type2: 'Poison',
-    },
-    {
-      name: 'Charmander',
-      number: '004',
-      description: 'The flame at the tip of his tail burns according to his feelings. It flares slightly when cheerful and burns vigorously when angry.',
-      type1: 'Fire',
-    },
-    {
-      name: 'Charmeleon',
-      number: '005',
-      description: 'Charmeleon has no qualms about taking down his rival using his sharp claws. If his enemy is strong, he becomes aggressive, and the flame at the end of his tail begins to burn more intensely, turning bluish.',
-      type1: 'Fire',
-    },
-  ],
+  page: 1,
+  details: 0,
+  battle1: 0,
+  battle2: 0,
+  type1: '',
+  type2: '',
+  loading: false,
+  error: '',
+  filterName: '',
 };
 
 const reducer = (state = initialState, action) => {
+  let newState = {};
   switch (action.type) {
+    case FETCH_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case FETCH_DETAILS_SUCCESS:
+      return {
+        ...state,
+        details: action.payload,
+        loading: false,
+      };
+
+    case SELECT_FOR_BATTLE:
+      // si el pokemon 1 es distinto de cero, actualizar pokemon 2
+
+      if (!state.battle1) {
+        newState = {
+          ...state,
+          battle1: {
+            number: action.payload.number,
+            name: action.payload.name,
+          },
+        };
+      } else {
+        newState = {
+          ...state,
+          battle2: {
+            number: action.payload.number,
+            name: action.payload.name,
+          },
+        };
+      }
+
+      return {
+        ...newState,
+        filterName: '',
+        type1: '',
+        type2: '',
+        page: 1,
+      };
+
+    case CLEAR_POKEMON_1:
+      return {
+        ...state,
+        battle1: 0,
+      };
+
+    case CLEAR_POKEMON_2:
+      return {
+        ...state,
+        battle2: 0,
+      };
+
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      };
+
+    case CHANGE_TYPE_1:
+      return {
+        ...state,
+        type1: action.payload.changeType,
+        page: 1,
+      };
+
+    case CHANGE_TYPE_2:
+      return {
+        ...state,
+        type2: action.payload.changeType,
+        page: 1,
+      };
+
+    case FILTER_NAME:
+      return {
+        ...state,
+        filterName: action.payload,
+        page: 1,
+      };
+
     default: return state;
   }
 };

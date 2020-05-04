@@ -2,7 +2,7 @@ import React from 'react';
 import Paragraph from '../../components/Paragraph';
 import './styles.css';
 
-function index() {
+function Info() {
   return (
     <div className="colInfo">
       <Paragraph
@@ -31,4 +31,4 @@ function index() {
   );
 }
 
-export default index;
+export default Info;
