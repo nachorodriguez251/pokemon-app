@@ -20,7 +20,7 @@ function Pagination({ pokemonsPerPage, totalPokemons, paginate }) {
             <Button
               styleName="btn-page"
               text={number}
-              disable={number == pageNumber}
+              disable={number === pageNumber}
             />
             {/* <a type="button" onClick={() => paginate(number)} href="#" className="page-link">
               {number}

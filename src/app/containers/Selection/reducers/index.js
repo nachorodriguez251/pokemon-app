@@ -1,6 +1,8 @@
 import {
   FETCH_DETAILS_SUCCESS,
   FETCH_DETAILS_REQUEST,
+  FETCH_LIST_REQUEST,
+  FETCH_LIST_SUCCESS,
   SELECT_FOR_BATTLE,
   CLEAR_POKEMON_1,
   CLEAR_POKEMON_2,
@@ -11,15 +13,16 @@ import {
 } from '../actionTypes';
 
 const initialState = {
-  page: 1,
-  details: 0,
   battle1: 0,
   battle2: 0,
   type1: '',
   type2: '',
-  loading: false,
-  error: '',
   filterName: '',
+  loadingList: false,
+  listUrl: [],
+  loadingDetails: false,
+  details: 0,
+  page: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,19 +31,31 @@ const reducer = (state = initialState, action) => {
     case FETCH_DETAILS_REQUEST:
       return {
         ...state,
-        loading: true,
+        loadingDetails: true,
       };
 
     case FETCH_DETAILS_SUCCESS:
       return {
         ...state,
         details: action.payload,
-        loading: false,
+        loadingDetails: false,
+      };
+
+    case FETCH_LIST_REQUEST:
+      return {
+        ...state,
+        loadingList: true,
+      };
+
+    case FETCH_LIST_SUCCESS:
+      return {
+        ...state,
+        listUrl: action.payload,
+        loadingList: false,
       };
 
     case SELECT_FOR_BATTLE:
       // si el pokemon 1 es distinto de cero, actualizar pokemon 2
-
       if (!state.battle1) {
         newState = {
           ...state,

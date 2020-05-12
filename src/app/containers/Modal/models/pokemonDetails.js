@@ -1,4 +1,5 @@
-class Pokemon {
+// pasar a funcion
+class PokemonDetails {
   constructor(name) {
     this.name = name;
     this.weaknesses = [];
@@ -58,4 +59,4 @@ class Pokemon {
   }
 }
 
-export default Pokemon;
+export default PokemonDetails;

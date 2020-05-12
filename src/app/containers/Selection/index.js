@@ -1,60 +1,80 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BattleGround from '../BattleGround';
 import SearchBox from './components/SearchBox';
 import SearchItem from './components/SearchItem';
 import Pagination from './components/Pagination';
 import './styles.css';
-import api from '../../base/api';
-import { changePage } from './actions';
+import { changePage, fetchPokemonList, fetchPokemonFilteredList } from './actions';
+import useDebounce from './hooks';
 
 function Selection() {
-  const pokemons = Object.values(api);
+  // get state variables
   const dispatch = useDispatch();
+  const pokemonsFromApi = useSelector((state) => state.listUrl);
   const pageNo = useSelector((state) => state.page);
   const type1 = useSelector((state) => state.type1);
   const type2 = useSelector((state) => state.type2);
   const filteredName = useSelector((state) => state.filterName);
-  let filteredPokemons = pokemons.filter((pokemon) => (pokemon.name.startsWith(filteredName)));
+  const loadingList = useSelector((state) => state.loadingList);
 
-  if (type1 !== '') filteredPokemons = filteredPokemons.filter((pokemon) => (pokemon.types.indexOf(type1) !== -1));
-  if (type2 !== '') filteredPokemons = filteredPokemons.filter((pokemon) => (pokemon.types.indexOf(type2) !== -1));
 
-  const [pokemonsPerPage] = useState(9);
-
-  // get current Pokemons
-  const indexOfLastPokemon = pageNo * pokemonsPerPage;
-  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = filteredPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
-
-  // change page
+  // set variables for pagination
+  const pokemonsPerPage = 9;
+  const isFiltered = (type1 !== '' || type2 !== '' || filteredName !== '');
+  const listLength = (isFiltered ? pokemonsFromApi.length : 151);
+  const inicio = (isFiltered ? (pageNo - 1) * pokemonsPerPage : 0);
+  const fin = (isFiltered ? pokemonsPerPage * pageNo : 9);
   const paginate = (pageNumber) => dispatch(changePage(pageNumber));
+
+
+  // debouncing
+  const debouncedFilter = useDebounce(filteredName, 1000);
+
+
+  useEffect(() => {
+    if (debouncedFilter === '' && !type1 && !type2) {
+      dispatch(fetchPokemonList(pageNo, pokemonsPerPage, dispatch));
+    } else {
+      dispatch(fetchPokemonFilteredList(debouncedFilter, type1, type2, dispatch));
+    }
+  }, [pageNo, type1, type2, debouncedFilter]);
+
 
   return (
     <div className="main-container">
-      <BattleGround />
-      <SearchBox />
-      <div className="results-container">
+      <div>
+        <BattleGround />
+        <SearchBox />
         {
-          currentPokemons.map((pokemon) => (
-            <SearchItem
-              key={pokemon._id}
-              id={pokemon.national_id}
-              name={pokemon.name}
-              number={(`000${pokemon.pkdx_id}`).substr(-3)}
-              description={pokemon.description}
-              type1={pokemon.types[0]}
-              type2={pokemon.types[1]}
-            />
-          ))
-         }
-      </div>
-      <div className="pagination-container">
-        <Pagination
-          pokemonsPerPage={pokemonsPerPage}
-          totalPokemons={filteredPokemons.length}
-          paginate={paginate}
-        />
+          loadingList
+            ? <h1>Loading...</h1>
+            : (
+              <div className="results-container">
+                {
+                pokemonsFromApi.slice(inicio, fin)
+                  .map((pokemon) => (
+                    <SearchItem
+                      key={pokemon.id}
+                      id={pokemon.id}
+                      name={pokemon.name}
+                      number={(`000${pokemon.id}`).substr(-3)}
+                      description={pokemon.description}
+                      type1={pokemon.types[0]}
+                      type2={pokemon.types[1]}
+                    />
+                  ))
+                }
+              </div>
+            )
+        }
+        <div className="pagination-container">
+          <Pagination
+            pokemonsPerPage={pokemonsPerPage}
+            totalPokemons={listLength}
+            paginate={paginate}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,14 @@
-import fetchData from '../api';
+import {
+  fetchPokemonDetailsFromApi,
+  fetchPokemonListFromApi,
+  fetchFiletedList,
+} from '../api';
 
 import {
-  FETCH_DETAILS_SUCCESS,
+  FETCH_LIST_REQUEST,
+  FETCH_LIST_SUCCESS,
   FETCH_DETAILS_REQUEST,
+  FETCH_DETAILS_SUCCESS,
   SELECT_FOR_BATTLE,
   CLEAR_POKEMON_1,
   CLEAR_POKEMON_2,
@@ -12,13 +18,22 @@ import {
   CHANGE_TYPE_2,
 } from '../actionTypes';
 
+export const fetchDetailsRequest = () => ({
+  type: FETCH_DETAILS_REQUEST,
+});
+
 export const fetchDetailsSuccess = (pokemonDetails) => ({
   type: FETCH_DETAILS_SUCCESS,
   payload: pokemonDetails,
 });
 
-export const fetchDetailsRequest = () => ({
-  type: FETCH_DETAILS_REQUEST,
+export const fetchListRequest = () => ({
+  type: FETCH_LIST_REQUEST,
+});
+
+export const fetchListSuccess = (pokemonList) => ({
+  type: FETCH_LIST_SUCCESS,
+  payload: pokemonList,
 });
 
 export const selectForBattle = (number, name) => ({
@@ -54,12 +69,38 @@ export const filterName = (name) => ({
   payload: name,
 });
 
-export const fetchPokemonDetails = (id, dispatch) => {
-  return () => {
-    try {
-      fetchData(id, dispatch);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const fetchPokemonDetails = (id, dispatch) => () => {
+  try {
+    dispatch(fetchDetailsRequest());
+    const toReturn = fetchPokemonDetailsFromApi(id);
+    toReturn.then((result) => {
+      dispatch(fetchDetailsSuccess(result));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchPokemonList = (pageNo, pokemonsPerPage, dispatch) => () => {
+  try {
+    dispatch(fetchListRequest());
+    const toReturn = fetchPokemonListFromApi(pageNo, pokemonsPerPage);
+    toReturn.then((result) => {
+      dispatch(fetchListSuccess(result));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchPokemonFilteredList = (name, type1, type2, dispatch) => () => {
+  try {
+    dispatch(fetchListRequest());
+    const toReturn = fetchFiletedList(name, type1, type2);
+    toReturn.then((result) => {
+      dispatch(fetchListSuccess(result));
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

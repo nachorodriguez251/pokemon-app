@@ -5,21 +5,21 @@ import { selectForBattle, fetchPokemonDetails } from '../../actions';
 import Button from '../../../../components/Button';
 import './styles.css';
 
-const limitDescription = (desc, limit = 200) => {
-  const newDesc = [];
-  if (desc.length > limit) {
-    desc.split(' ').reduce((acc, curr) => {
-      if (acc + curr.length <= limit) {
-        newDesc.push(curr);
-      }
-      return acc + curr.length;
-    }, 0);
+// const limitDescription = (desc, limit = 200) => {
+//   const newDesc = [];
+//   if (desc.length > limit) {
+//     desc.split(' ').reduce((acc, curr) => {
+//       if (acc + curr.length <= limit) {
+//         newDesc.push(curr);
+//       }
+//       return acc + curr.length;
+//     }, 0);
 
-    // if desc is longer than expected, return the new desc with ... at the end
-    return `${newDesc.join(' ')} ...`;
-  }
-  return desc;
-};
+//     // if desc is longer than expected, return the new desc with ... at the end
+//     return `${newDesc.join(' ')} ...`;
+//   }
+//   return desc;
+// };
 
 function SearchItem(props) {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function SearchItem(props) {
       </div>
       <div className="pokemon-details">
         <p className="pokemon-description block-with-text">
-          { limitDescription(props.description) }
+          { props.description }
         </p>
         <div className="pokemon-types">
           <span

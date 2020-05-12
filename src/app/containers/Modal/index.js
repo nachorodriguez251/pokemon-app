@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectForBattle, fetchDetailsSuccess } from '../Selection/actions';
 import Button from '../../components/Button';
-import NoMatch from '../../containers/NoMatch';
+import NoMatch from '../NoMatch';
 import './styles.css';
 
 function Modal() {
@@ -22,14 +22,14 @@ function Modal() {
   const battle1 = useSelector((state) => state.battle1);
   const battle2 = useSelector((state) => state.battle2);
 
-  const loading = useSelector((state) => state.loading);
+  const loadingDetails = useSelector((state) => state.loadingDetails);
 
   // ubicar mejor esta lógica!!
   if (isNaN(id) || id < 1 || id > 151) return <NoMatch />;
 
   return (
     <div className="back-container">
-      { loading
+      { loadingDetails
         ? (
           <div className="back-container-loading">
             <div className="modal">

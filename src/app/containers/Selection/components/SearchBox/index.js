@@ -9,7 +9,7 @@ function SearchBox() {
   const filteredName = useSelector((state) => state.filterName);
   const type1 = useSelector((state) => state.type1);
   const type2 = useSelector((state) => state.type2);
-  
+
   const chType1 = (type) => dispatch(changeType1(type));
   const chType2 = (type) => dispatch(changeType2(type));
 
@@ -31,9 +31,9 @@ function SearchBox() {
             name="type1"
             title="Select Type 1"
             value={type1}
-            change={chType1}
             options={['normal', 'fire', 'water', 'electric', 'grass', 'ice', 'fighting', 'poison',
               'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy']}
+            change={chType1}
           />
 
           <Select
@@ -41,9 +41,9 @@ function SearchBox() {
             name="type2"
             title="Select Type 2"
             value={type2}
-            change={chType2}
             options={['normal', 'fire', 'water', 'electric', 'grass', 'ice', 'fighting', 'poison',
               'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy']}
+            change={chType2}
           />
 
           <input
